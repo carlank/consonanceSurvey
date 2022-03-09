@@ -4,30 +4,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/styles.css">
-
 </head>
 
 <body>
-  <form id="form">
-    <button id="nextButton" type="submit">Next Sample</button>
-    <button id="playButton" type="button">Replay</button>
-    <input type="range" value="0.1" min="0" max="1" step="0.01" id="volumeSlider" name="volume">
-    <label for="volume">Volume</label>
-    <h4>How consonant is the sound, with 0 the least consonant
-      and 10 the most consonant?</h4>
-    <div class="response-button-group">
-      <input name="response" type="radio" id="1" value="1"><label for="1">1</label>
-      <input name="response" type="radio" id="2" value="2"><label for="2">2</label>
-      <input name="response" type="radio" id="3" value="3"><label for="3">3</label>
-      <input name="response" type="radio" id="4" value="4"><label for="4">4</label>
-      <input name="response" type="radio" id="5" value="5"><label for="5">5</label>
-      <input name="response" type="radio" id="6" value="6"><label for="6">6</label>
-      <input name="response" type="radio" id="7" value="7"><label for="7">7</label>
-      <input name="response" type="radio" id="8" value="8"><label for="8">8</label>
-      <input name="response" type="radio" id="9" value="9"><label for="9">9</label>
-      <input name="response" type="radio" id="10" value="10"><label for="10">10</label>
+  <div class="tabs-container">
+    <ul class="tabs-header">
+      <li>1 to 10 Scale</li>
+      <li>Comparing</li>
+    </ul>
+    <div class="tabs-body">
+      <form class="tab" id="oneToTenForm">
+        <button id="nextButton" type="submit">Next Sample</button>
+        <button id="playButton" type="button">Replay</button>
+        <input type="range" value="0.1" min="0" max="1" step="0.01" id="volumeSlider" name="volume">
+        <label for="volume">Volume</label>
+        <h4>How consonant is the sound, with 0 the least consonant
+          and 10 the most consonant?</h4>
+        <div class="response-button-group">
+          <input name="response" type="radio" id="1" value="1"><label for="1">1</label>
+          <input name="response" type="radio" id="2" value="2"><label for="2">2</label>
+          <input name="response" type="radio" id="3" value="3"><label for="3">3</label>
+          <input name="response" type="radio" id="4" value="4"><label for="4">4</label>
+          <input name="response" type="radio" id="5" value="5"><label for="5">5</label>
+          <input name="response" type="radio" id="6" value="6"><label for="6">6</label>
+          <input name="response" type="radio" id="7" value="7"><label for="7">7</label>
+          <input name="response" type="radio" id="8" value="8"><label for="8">8</label>
+          <input name="response" type="radio" id="9" value="9"><label for="9">9</label>
+          <input name="response" type="radio" id="10" value="10"><label for="10">10</label>
+        </div>
+        <input type="text" id="numberDone" name="numberDone" readonly>
+      </form>
+      <form class="tab compareForm" id="compareForm">
+        <button class="compareButton" type="button"></button>
+        <button class="compareButton" type="button"></button>
+      </form>
     </div>
-  </form>
+  </div>
+  <script src="js/tabs.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
