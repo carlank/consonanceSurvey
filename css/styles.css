@@ -3,6 +3,14 @@
   height: 80vh;
 }
 
+.tab{
+  flex-direction: column;
+}
+
+.compareForm{
+  display: flex;
+}
+
 .heard{
   background: green;
 }

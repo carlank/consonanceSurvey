@@ -4,8 +4,8 @@ const body = document.querySelector('.tabs-body')
 const pages = [...body.children]
 pages.forEach(page => page.style.display = 'none')
 
-let defaultTabIndex = 1
-let currentTabIndex = 1
+let defaultTabIndex = -1
+let currentTabIndex
 
 function setTab( index ){
   if ( currentTabIndex != undefined ){
@@ -15,6 +15,5 @@ function setTab( index ){
   pages[currentTabIndex].style.display = 'flex';
 }
 
-setTab(defaultTabIndex)
 headers.forEach((header, index) => header.onclick = e => setTab(index))
 
