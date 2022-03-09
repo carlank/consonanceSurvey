@@ -35,13 +35,13 @@ const harmonicWave = audioCtx.createPeriodicWave(real,imag);
 function setup(){
   freq1 = randInt(1,10);
   freq2 = randInt(1,10);
-  console.log(freq1, freq2)
-  averageFreq = (freq1 + freq2)/2
-  perUnitFreq = baseFreq / averageFreq
-  console.log(averageFreq, perUnitFreq)
-  freq1 *= perUnitFreq
-  freq2 *= perUnitFreq
-  console.log(freq1, freq2)
+  console.log(freq1, freq2);
+  averageFreq = (freq1 + freq2)/2;
+  perUnitFreq = baseFreq / averageFreq;
+  console.log(averageFreq, perUnitFreq);
+  freq1 *= perUnitFreq;
+  freq2 *= perUnitFreq;
+  console.log(freq1, freq2);
 }
 function play(){
   osc1 = audioCtx.createOscillator();
@@ -55,8 +55,8 @@ function play(){
 
   volume.gain.value = volumeInput.value;
 
-  osc1.connect(volume)
-  osc2.connect(volume)
+  osc1.connect(volume);
+  osc2.connect(volume);
   volume.connect(audioCtx.destination);
   osc1.start();
   osc2.start();
@@ -78,7 +78,7 @@ oneToTenForm.addEventListener("submit",(e)=>{
     numberDone++;
     numberDoneText.value = numberDone;
     results.push([freq1, freq2, res])
-    console.log(freq1, freq2, res)
+    console.log(freq1, freq2, res);
     const params = new Object();
     params.freq1 = freq1;
     params.freq2 = freq2;
@@ -93,12 +93,12 @@ oneToTenForm.addEventListener("submit",(e)=>{
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     http.onreadystatechange = function() {
       if (http.readyState == 4 && http.status == 200) {
-        console.log(http.responseText);
+        console.log(http.responseText);;
       }
       else {
-        console.log('uhoh')
+        console.log('uhoh');
       }
-    }
+    };
   }
   for (const responseRadioButton in document.getElementsByName("response")){
     responseRadioButton.checked = false;
@@ -114,68 +114,69 @@ setup();
 
 
 function createContextAndOscillatorPair(){
-  const ctx = new AudioContext()
-  ctx.suspend()
-  let multiple1 = randInt(1,10)
-  let multiple2 = randInt(1,10)
-  let osc1 = ctx.createOscillator()
-  let osc2 = ctx.createOscillator()
-  let volume = ctx.createGain()
-  averageFreq = (multiple1 + multiple2)/2
-  perUnitFreq = baseFreq / averageFreq
-  let freq1 = multiple1 * perUnitFreq
-  let freq2 = multiple2 * perUnitFreq
+  const ctx = new AudioContext();
+  ctx.suspend();
+  let multiple1 = randInt(1,10);
+  let multiple2 = randInt(1,10);
+  let osc1 = ctx.createOscillator();
+  let osc2 = ctx.createOscillator();
+  let volume = ctx.createGain();
+  averageFreq = (multiple1 + multiple2)/2;
+  perUnitFreq = baseFreq / averageFreq;
+  let freq1 = multiple1 * perUnitFreq;
+  let freq2 = multiple2 * perUnitFreq;
   osc1.setPeriodicWave(harmonicWave);
   osc1.frequency.setValueAtTime(freq1, ctx.currentTime); // value in hertz
   osc2.setPeriodicWave(harmonicWave);
   osc2.frequency.setValueAtTime(freq2, ctx.currentTime); // value in hertz
   volume.gain.value = volumeInput.value;
-  osc1.connect(volume)
-  osc2.connect(volume)
+  osc1.connect(volume);
+  osc2.connect(volume);
   volume.connect(ctx.destination);
-  osc1.start()
-  osc2.start()
-  console.log(multiple1, multiple2, freq1 / baseFreq, freq2 / baseFreq, multiple1/multiple2, freq1/freq2)
-  return [ctx, osc1, osc2, freq1, freq2]
+  osc1.start();
+  osc2.start();
+  console.log(multiple1, multiple2, freq1 / baseFreq, freq2 / baseFreq, multiple1/multiple2, freq1/freq2);
+  return [ctx, osc1, osc2, freq1, freq2];
 }
 
 // Comparison of two intervals
-const compareForm = document.getElementById('compareForm')
-const compareButtons = [...compareForm.children]
+// It's really gross that this is all just one big file without proper namespaces
+const compareForm = document.getElementById('compareForm');
+const compareButtons = [...compareForm.children];
 
-let compareCtx1, compareOsc11, compareOsc12
-let compareCtx2, compareOsc21, compareOsc22
-let contexts
+let compareCtx1, compareOsc11, compareOsc12;
+let compareCtx2, compareOsc21, compareOsc22;
+let contexts;
 
 function reset (){
   [compareCtx1, compareOsc11, compareOsc12, f11, f12] = createContextAndOscillatorPair();
   [compareCtx2, compareOsc21, compareOsc22, f21, f22] = createContextAndOscillatorPair();
   contexts = [compareCtx1, compareCtx2];
 }
-reset()
+reset();
 
 for (const index in compareButtons){
-  const button = compareButtons[index]
+  const button = compareButtons[index];
   button.addEventListener("click", event => {
-    compareOsc11.stop()
-    compareOsc12.stop()
-    compareOsc21.stop()
-    compareOsc22.stop()
-    compareButtons.forEach(b=>b.classList.remove("heard"))
-    let count = window.localStorage.getItem("count")
+    compareOsc11.stop();
+    compareOsc12.stop();
+    compareOsc21.stop();
+    compareOsc22.stop();
+    compareButtons.forEach(b=>b.classList.remove("heard"));
+    let count = window.localStorage.getItem("count");
     if (count == undefined){
-      count = 0
+      count = 0;
     }
     count++;
-    window.localStorage.setItem(count, [f11,f12,f21,f22,index])
-    window.localStorage.setItem("count",count)
-    reset()
-  })
+    window.localStorage.setItem(count, [f11,f12,f21,f22,index]);
+    window.localStorage.setItem("count",count);
+    reset();
+  });
   button.addEventListener("mouseenter", event => {
-    contexts[index].resume()
-    button.classList.add("heard")
+    contexts[index].resume();
+    button.classList.add("heard");
     button.addEventListener("mouseleave", event => {
-      contexts[index].suspend()
-    }, {once: true})
-  })
+      contexts[index].suspend();
+    }, {once: true});
+  });
 }
