@@ -52,8 +52,12 @@ for (const index in compareButtons){
       count = 0;
     }
     count++;
-    window.localStorage.setItem(count, [f11,f12,f21,f22,index]);
+    const data = [f11,f12,f21,f22,index];
+    window.localStorage.setItem(count, data);
     window.localStorage.setItem("count",count);
+    Pageclip.send("BMlH4AWTDi8mICuHCHpy8z8cSA2a0QpT", 'consonanceForm', data, (err, res) => {
+      console.log(error || response);
+    });
     reset();
   });
   button.addEventListener("mouseenter", event => {
@@ -64,3 +68,4 @@ for (const index in compareButtons){
     }, {once: true});
   });
 }
+
