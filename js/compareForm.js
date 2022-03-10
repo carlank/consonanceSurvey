@@ -39,6 +39,17 @@ function reset (){
 }
 reset();
 
+let sessionID = window.localStorage.getItem("sessionID");
+if (sessionID == null){
+  if (Crypto.randomUUID){
+    // I like this, but it's still not supported by a lot of browsers
+    sessionID = Crypto.randomUUID();
+  } else {
+    // less jank than math.random but dependencies ew
+    sessionID = uuidv4();
+  }
+}
+
 for (const index in compareButtons){
   const button = compareButtons[index];
   button.addEventListener("click", event => {
@@ -52,7 +63,7 @@ for (const index in compareButtons){
       count = 0;
     }
     count++;
-    const data = [f11,f12,f21,f22,index];
+    const data = [sessionID,f11,f12,f21,f22,index];
     window.localStorage.setItem(count, data);
     window.localStorage.setItem("count",count);
     Pageclip.send("BMlH4AWTDi8mICuHCHpy8z8cSA2a0QpT", 'consonanceForm', data, (err, res) => {
