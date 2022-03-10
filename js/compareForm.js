@@ -63,7 +63,8 @@ for (const index in compareButtons){
       count = 0;
     }
     count++;
-    const data = [sessionID,f11,f12,f21,f22,index];
+    const data = {sessionID,f11,f12,f21,f22,preferedInterval:index};
+    console.log(data)
     window.localStorage.setItem(count, data);
     window.localStorage.setItem("count",count);
     Pageclip.send("BMlH4AWTDi8mICuHCHpy8z8cSA2a0QpT", 'consonanceForm', data, (err, res) => {
