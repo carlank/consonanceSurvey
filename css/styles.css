@@ -1,16 +1,38 @@
-.compareButton{
+.compareButton {
   width: 100vw;
   height: 80vh;
 }
 
-.tab{
+.tabs-header {
+  display: flex;
+  flex-direction: row;
+}
+
+ul.tabs-header > li {
+  display: block;
+  margin: auto;
+  border: 1px black solid;
+  padding: 4px 8px;
+}
+
+ul.tabs-header > li:hover {
+  background: #bbb;
+}
+
+ul.tabs-header > li:active {
+  background: #888;
+}
+
+
+
+.tab {
   flex-direction: column;
 }
 
-.compareForm{
+.compareForm {
   display: flex;
 }
 
-.heard{
+button.heard {
   background: green;
 }
