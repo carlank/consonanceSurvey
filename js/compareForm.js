@@ -1,8 +1,25 @@
+function getFareyPairs( n ){
+  let pairs = [[1,1],[n-1,n]];
+  while (pairs[pairs.length-1][0] > 0){
+    let ab = pairs[pairs.length-2];
+    let cd = pairs[pairs.length-1];
+    let k = Math.floor((n+ab[1])/cd[1]);
+    pairs.push([k*cd[0] - ab[0], k*cd[1] - ab[1]]);
+  }
+  pairs.pop(); // Remove 0:1
+  return pairs;
+}
+
+let possibleRatios = getFareyPairs(12); // 46 ratios, including unison
+// intervals with a wide range are prolematic; e.g. 1:12
+
 function createContextAndOscillatorPair(){
   const ctx = new AudioContext();
   ctx.suspend();
-  let multiple1 = randInt(1,10);
-  let multiple2 = randInt(1,10);
+
+  let ratio = possibleRatios[Math.floor(Math.random() * possibleRatios.length)];
+  let multiple1 = ratio[0];
+  let multiple2 = ratio[1];
   let osc1 = ctx.createOscillator();
   let osc2 = ctx.createOscillator();
   let volume = ctx.createGain();
